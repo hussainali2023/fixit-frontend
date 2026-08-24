@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
-import { apiFetch } from "@/lib/api";
 import { cookies } from "next/headers";
+import { apiFetch } from "@/lib/api";
 
 // POST /api/auth/register — body: { name, email, password, role }
 export async function RegisterAction(prevState: any, data: any) {

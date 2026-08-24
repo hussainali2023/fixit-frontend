@@ -20,8 +20,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { registerSchema, RegisterFormValues } from "@/lib/validation/auth";
 import { RegisterAction } from "../_actions/authActions";
-import { RegisterFormValues, registerSchema } from "@/lib/validation/auth";
 
 export default function RegisterForm() {
   const router = useRouter();
