@@ -7,6 +7,36 @@ import { updateServiceAction, deleteServiceAction } from "@/lib/actions/serviceA
 import { toast } from "sonner";
 import Image from "next/image";
 
+/* ── Category → Image mapping (same images as /technicians page) ── */
+const CATEGORY_IMAGES: Record<string, string> = {
+  electrician:
+    "https://gacservices.com/wp-content/uploads/2018/01/electrician-working-on-electrical-panel-circuit-breaker-box.jpg",
+  plumber:
+    "https://bizeleven.com/assets/img/listing-gallery/68b2d31e9a339.jpg",
+  ac: "https://www.sipltraining.com/assets/img/sipl-hvac-course.jpeg",
+  cleaning:
+    "https://cleaningkarigar.com/assets/service-sofa-DGBCWx4E.png",
+};
+
+/** Pick a contextual image based on the service category / name / description */
+function getServiceImage(service: any): string {
+  const category = (service?.category || "").toLowerCase();
+  const name = (service?.name || "").toLowerCase();
+  const desc = (service?.description || "").toLowerCase();
+  const text = `${category} ${name} ${desc}`;
+
+  if (text.includes("ac") || text.includes("hvac") || text.includes("air condition") || text.includes("cooling") || text.includes("repair"))
+    return CATEGORY_IMAGES.ac;
+  if (text.includes("plumb") || text.includes("pipe") || text.includes("water"))
+    return CATEGORY_IMAGES.plumber;
+  if (text.includes("clean") || text.includes("sofa") || text.includes("room") || text.includes("wash"))
+    return CATEGORY_IMAGES.cleaning;
+  if (text.includes("electric") || text.includes("wiring") || text.includes("circuit"))
+    return CATEGORY_IMAGES.electrician;
+
+  return CATEGORY_IMAGES.electrician; // default fallback
+}
+
 function ServiceCard({ service, onDelete, onUpdate }: { service: any, onDelete: (id: string) => void, onUpdate: (id: string, payload: any) => void }) {
   const [isEditing, setIsEditing] = useState(false);
   const [pending, startTransition] = useTransition();
@@ -45,7 +75,7 @@ function ServiceCard({ service, onDelete, onUpdate }: { service: any, onDelete: 
       <div className="relative w-full aspect-[16/9] bg-muted">
         <Image
           unoptimized
-          src={service.image || "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600"}
+          src={service.image || getServiceImage(service)}
           alt={service.name}
           fill
           className="object-cover"
