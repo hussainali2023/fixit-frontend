@@ -38,7 +38,7 @@ export default function ContactPage() {
                     <p className="font-bold text-foreground text-sm">
                       Customer Helpline
                     </p>
-                    <p className="text-muted-foreground">+91 1708-577675</p>
+                    <p className="text-muted-foreground">+91 9064198653</p>
                   </div>
                 </div>
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
                     <p className="font-bold text-foreground text-sm">
                       Email Address
                     </p>
-                    <p className="text-muted-foreground">mahirjr98@gmail.com</p>
+                    <p className="text-muted-foreground">iamhussainali2@gmail.com</p>
                   </div>
                 </div>
 
@@ -63,7 +63,7 @@ export default function ContactPage() {
                       Headquarters
                     </p>
                     <p className="text-muted-foreground">
-                      Uttara, Kolkata, India
+                      Kolkata, India
                     </p>
                   </div>
                 </div>

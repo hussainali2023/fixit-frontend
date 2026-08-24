@@ -36,7 +36,7 @@ export function ContactForm() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "e44c211f-c020-4e3f-9177-38685e1fb06b",
+          access_key: process.env.NEXT_PUBLIC_MESSAGE_KEY,
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
@@ -101,7 +101,7 @@ export function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="abrarashhab98@gmail.com"
+              placeholder="iamhussainali2@gmail.com"
               className="rounded-xl text-xs"
             />
           </div>
