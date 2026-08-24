@@ -11,9 +11,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginAction } from "../_actions/authActions";
 import { toast } from "sonner";
 
-const DEMO_CUSTOMER = { email: "testcustomer999@fix.com", pass: "password123" };
+const DEMO_CUSTOMER = { email: "customer1@fix.com", pass: "123456" };
 const DEMO_TECHNICIAN = { email: "technician1@fix.com", pass: "123456" };
-const DEMO_ADMIN = {email:"admin@Fix.com", pass:"123456"}
+const DEMO_ADMIN = {email:"admin@fix.com", pass:"123456"}
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
