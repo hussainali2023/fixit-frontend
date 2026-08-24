@@ -1,5 +1,5 @@
-import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navbar";
+import { Footer } from "../(publicGroup)/_components/Footer";
 import getMe from "@/service/getMe";
 
 export default async function AuthLayout({

@@ -20,6 +20,8 @@ export default function ContactPage() {
             here to help 24/7.
           </p>
         </div>
+
+        {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Info Column */}
           <div className="lg:col-span-5 space-y-6">
@@ -36,9 +38,10 @@ export default function ContactPage() {
                     <p className="font-bold text-foreground text-sm">
                       Customer Helpline
                     </p>
-                    <p className="text-muted-foreground">+91 9064198653</p>
+                    <p className="text-muted-foreground">+91 1708-577675</p>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-3.5">
                   <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">
                     <Mail className="w-5 h-5" />
@@ -47,7 +50,7 @@ export default function ContactPage() {
                     <p className="font-bold text-foreground text-sm">
                       Email Address
                     </p>
-                    <p className="text-muted-foreground">iamhussainali2@gmail.com</p>
+                    <p className="text-muted-foreground">mahirjr98@gmail.com</p>
                   </div>
                 </div>
 
@@ -60,10 +63,11 @@ export default function ContactPage() {
                       Headquarters
                     </p>
                     <p className="text-muted-foreground">
-                    Kolkata, India
+                      Uttara, Kolkata, India
                     </p>
                   </div>
                 </div>
+
                 <div className="flex items-start gap-3.5">
                   <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">
                     <Clock className="w-5 h-5" />
@@ -80,6 +84,8 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+
+          {/* Right Form Column (Imported Component) */}
           <div className="lg:col-span-7">
             <ContactForm />
           </div>

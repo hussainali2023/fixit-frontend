@@ -11,9 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginAction } from "../_actions/authActions";
 import { toast } from "sonner";
 
-const DEMO_CUSTOMER = { email: "customer1@fix.com", pass: "password123" };
+const DEMO_CUSTOMER = { email: "testcustomer999@fix.com", pass: "password123" };
 const DEMO_TECHNICIAN = { email: "technician1@fix.com", pass: "123456" };
-const DEMO_ADMIN = { email: "admin@fix.com", pass: "123456" };
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -96,17 +95,6 @@ const LoginForm = () => {
           >
             <Wrench className="w-3.5 h-3.5 text-emerald-600" />
             <span>Demo Technician</span>
-          </Button>
-
-                 <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => handleQuickDemo(DEMO_ADMIN.email, DEMO_ADMIN.pass, "Admin")}
-            className="rounded-xl text-[11px] font-bold py-1.5 px-1 h-auto flex items-center justify-center gap-1 cursor-pointer hover:bg-emerald-500/10"
-          >
-            <Wrench className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Demo Admin</span>
           </Button>
         </div>
       </div>
