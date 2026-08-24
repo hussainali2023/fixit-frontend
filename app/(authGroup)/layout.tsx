@@ -1,23 +1,18 @@
 import { Footer } from "@/components/shared/footer";
 import { Navbar } from "@/components/shared/navbar";
 
-
-const HomeLayout = async ({
+export default async function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) => {
+}>) {
 
 
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full flex flex-col bg-background text-foreground">
       <Navbar />
-
       <main className="flex-1">{children}</main>
-
-      <Footer/>
+      <Footer />
     </div>
   );
-};
-
-export default HomeLayout;
+}
