@@ -13,6 +13,7 @@ import {
   User,
   ChevronDown,
 } from "lucide-react";
+import { logoutAction } from "@/app/(authGroup)/_actions/authActions";
 import { toast } from "sonner";
 
 interface NavbarProps {
@@ -51,6 +52,17 @@ export function Navbar({ user }: NavbarProps) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+    setDropdownOpen(false);
+  }, [pathname]);
+
+  const handleLogout = async () => {
+    await logoutAction();
+    toast.success("Logged out successfully");
+    router.push("/login");
+    router.refresh();
+  };
 
   return (
     <header
@@ -96,6 +108,7 @@ export function Navbar({ user }: NavbarProps) {
             })}
           </nav>
 
+          {/* Right: Auth + User */}
           <div className="flex items-center gap-3">
             {isLoggedIn ? (
               <div className="relative hidden md:block">
@@ -127,7 +140,7 @@ export function Navbar({ user }: NavbarProps) {
                       Dashboard
                     </Link>
                     <button
-                     
+                      onClick={handleLogout}
                       className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors"
                     >
                       <LogOut className="w-4 h-4" />
@@ -153,7 +166,7 @@ export function Navbar({ user }: NavbarProps) {
               </div>
             )}
 
-            {/*  Mobile  */}
+            {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl border border-border bg-card cursor-pointer"
@@ -195,7 +208,7 @@ export function Navbar({ user }: NavbarProps) {
                   <LayoutDashboard className="w-4 h-4 text-primary" /> Dashboard
                 </Link>
                 <button
-                  
+                  onClick={handleLogout}
                   className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-destructive hover:bg-destructive/10"
                 >
                   <LogOut className="w-4 h-4" /> Logout
