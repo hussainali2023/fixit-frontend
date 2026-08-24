@@ -101,7 +101,7 @@ export function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              placeholder="iamhussainali2@gmail.com"
+              placeholder="abrarashhab98@gmail.com"
               className="rounded-xl text-xs"
             />
           </div>
