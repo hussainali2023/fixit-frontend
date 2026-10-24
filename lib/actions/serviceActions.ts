@@ -29,10 +29,11 @@ export async function getServiceAction(id: string) {
 // POST /api/services — TECHNICIAN only
 export async function createServiceAction(prevState: any, formData: FormData) {
   const payload = {
-    name: formData.get("name"),
+    name: formData.get("name") || formData.get("title"),
     description: formData.get("description"),
     price: Number(formData.get("price")),
     category: formData.get("category") || "General",
+    image: (formData.get("image") as string) || (formData.get("imageUrl") as string) || null,
   };
   const res = await apiFetch("/api/services", {
     method: "POST",
@@ -52,7 +53,7 @@ export async function createServiceAction(prevState: any, formData: FormData) {
 // PATCH /api/services/:id — TECHNICIAN only
 export async function updateServiceAction(
   id: string,
-  payload: { name?: string; description?: string; price?: number; category?: string }
+  payload: { name?: string; description?: string; price?: number; category?: string; image?: string }
 ) {
   const res = await apiFetch(`/api/services/${id}`, {
     method: "PATCH",

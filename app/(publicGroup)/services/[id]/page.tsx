@@ -78,7 +78,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-muted shadow-lg">
             <Image
               unoptimized
-              src={service.image || getServiceImage(service)}
+              src={service.image || service.imageUrl || getServiceImage(service)}
               alt={service.name}
               fill
               className="object-cover"
@@ -123,8 +123,18 @@ export default async function ServiceDetailPage({ params }: Props) {
                 <Wrench className="w-4 h-4 text-primary" /> About the Technician
               </h2>
               <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-black shrink-0">
-                  {techUser?.name?.[0]?.toUpperCase() || <User className="w-6 h-6" />}
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-black shrink-0 relative overflow-hidden border border-border">
+                  {technician.profilePhoto || techUser?.image ? (
+                    <Image
+                      unoptimized
+                      src={technician.profilePhoto || techUser?.image}
+                      alt={techUser?.name || "Technician"}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    techUser?.name?.[0]?.toUpperCase() || <User className="w-6 h-6" />
+                  )}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

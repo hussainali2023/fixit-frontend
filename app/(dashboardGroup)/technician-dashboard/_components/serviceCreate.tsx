@@ -11,6 +11,8 @@ import { Wrench, PlusCircle, Tag, Clock, DollarSign, ImageIcon } from "lucide-re
 import { toast } from "sonner";
 import { createServices } from "../_actions/serviceCreateAction";
 
+import { ImageLinkUploader } from "@/components/shared/ImageLinkUploader";
+
 interface CreateServiceFormProps {
   categories: any[];
 }
@@ -40,7 +42,7 @@ export default function CreateServiceForm({ categories = [] }: CreateServiceForm
           </div>
           <h1 className="text-2xl font-extrabold text-foreground">Create New Service</h1>
           <p className="text-xs text-muted-foreground mt-1">
-            Fill out the form below to add a new service offering.
+            Fill out the form below to add a new service offering with live image preview.
           </p>
         </div>
 
@@ -57,22 +59,16 @@ export default function CreateServiceForm({ categories = [] }: CreateServiceForm
                 id="title"
                 name="title"
                 required
-                placeholder="e.g. Electry Line Repair"
+                placeholder="e.g. Master AC Repair & Gas Refill"
                 className="rounded-xl text-xs"
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="image" className="text-xs font-semibold flex items-center gap-1">
-                <ImageIcon className="w-3.5 h-3.5 text-primary" /> Service Cover Image URL
-              </Label>
-              <Input
-                id="image"
-                name="image"
-                placeholder="e.g. https://images.unsplash.com/photo-1621905251189-08b45d6a269e"
-                className="rounded-xl text-xs"
-              />
-            </div>
+            {/* Image Link Uploader with Live Preview */}
+            <ImageLinkUploader
+              name="image"
+              label="Service Cover Photo (URL Link)"
+            />
 
             {/* Category Dropdown */}
             <div className="space-y-2">

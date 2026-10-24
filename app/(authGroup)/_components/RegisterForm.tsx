@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { registerSchema, RegisterFormValues } from "@/lib/validation/auth";
 import { RegisterAction } from "../_actions/authActions";
+import { ImageLinkUploader, PRESET_PROFILE_AVATARS } from "@/components/shared/ImageLinkUploader";
 
 export default function RegisterForm() {
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function RegisterForm() {
       name: "",
       email: "",
       phone: "",
+      image: "",
       password: "",
       confirmPassword: "",
     },
@@ -172,6 +174,19 @@ export default function RegisterForm() {
             {errors.phone.message}
           </p>
         )}
+      </div>
+
+      {/* Profile Photo / Avatar Link */}
+      <div className="bg-card/60 border border-border/80 rounded-2xl p-3.5 space-y-2">
+        <ImageLinkUploader
+          name="image"
+          label="Profile Photo URL (Optional)"
+          placeholder="Paste avatar URL (Unsplash, Cloudinary, Imgur, CDN)..."
+          presets={PRESET_PROFILE_AVATARS}
+          aspectRatio="square"
+          value={watch("image") || ""}
+          onChange={(url) => setValue("image", url)}
+        />
       </div>
 
       {/* Password Input */}

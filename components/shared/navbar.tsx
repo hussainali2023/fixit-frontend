@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Wrench,
@@ -39,6 +40,7 @@ export function Navbar({ user }: NavbarProps) {
   const userInfo = user?.data?.user || user?.data?.result || user?.data || null;
   const isLoggedIn = !!userInfo;
   const role = userInfo?.role;
+  const userPhoto = userInfo?.image || userInfo?.technicianProfile?.profilePhoto;
 
   const dashboardHref =
     role === "TECHNICIAN"
@@ -119,8 +121,18 @@ export function Navbar({ user }: NavbarProps) {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-border/70 bg-card/60 backdrop-blur-sm hover:bg-muted/60 transition-all text-sm font-semibold text-foreground cursor-pointer"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary flex items-center justify-center font-bold text-xs">
-                    {userInfo?.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary flex items-center justify-center font-bold text-xs relative overflow-hidden border border-border/50">
+                    {userPhoto ? (
+                      <Image
+                        unoptimized
+                        src={userPhoto}
+                        alt={userInfo?.name || "User"}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      userInfo?.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />
+                    )}
                   </div>
                   <span className="max-w-[100px] truncate">{userInfo?.name}</span>
                   <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`} />
@@ -200,9 +212,24 @@ export function Navbar({ user }: NavbarProps) {
           <div className="pt-2 border-t border-border/50 mt-2">
             {isLoggedIn ? (
               <>
-                <div className="px-4 py-2 mb-1">
-                  <p className="text-sm font-bold text-foreground">{userInfo?.name}</p>
-                  <p className="text-xs text-muted-foreground">{userInfo?.email}</p>
+                <div className="px-4 py-2 mb-1 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 text-primary flex items-center justify-center font-bold text-sm relative overflow-hidden border border-border/50 shrink-0">
+                    {userPhoto ? (
+                      <Image
+                        unoptimized
+                        src={userPhoto}
+                        alt={userInfo?.name || "User"}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      userInfo?.name?.[0]?.toUpperCase() || <User className="w-4 h-4" />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-foreground truncate">{userInfo?.name}</p>
+                    <p className="text-xs text-muted-foreground truncate">{userInfo?.email}</p>
+                  </div>
                 </div>
                 <Link
                   href={dashboardHref}

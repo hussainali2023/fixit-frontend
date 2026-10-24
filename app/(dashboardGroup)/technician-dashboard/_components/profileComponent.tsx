@@ -10,13 +10,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { User, MapPin, DollarSign, Briefcase, Award, Save, Clock, Tag } from "lucide-react";
 import { toast } from "sonner";
 import { updateProfileAction } from "../_actions/profileAction";
+import { ImageLinkUploader, PRESET_PROFILE_AVATARS } from "@/components/shared/ImageLinkUploader";
 
 interface ProfileFormProps {
-  categories: any[];
+  categories?: any[];
   defaultCategoryId?: string;
+  defaultProfilePhoto?: string;
 }
 
-export default function ProfileForm({ categories = [], defaultCategoryId }: ProfileFormProps) {
+export default function ProfileForm({ categories = [], defaultCategoryId, defaultProfilePhoto = "" }: ProfileFormProps) {
   const [state, formAction, pending] = useActionState(updateProfileAction, null) as any;
 
   useEffect(() => {
@@ -48,6 +50,18 @@ export default function ProfileForm({ categories = [], defaultCategoryId }: Prof
         {/* Profile Form */}
         <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
           <form action={formAction} className="space-y-5">
+
+            {/* Profile Photo Uploader */}
+            <div className="bg-muted/30 border border-border/80 rounded-2xl p-4">
+              <ImageLinkUploader
+                name="profilePhoto"
+                label="Profile Picture URL"
+                placeholder="Paste profile photo URL..."
+                presets={PRESET_PROFILE_AVATARS}
+                aspectRatio="square"
+                defaultValue={defaultProfilePhoto}
+              />
+            </div>
 
             {/* 1. Location & Rate Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

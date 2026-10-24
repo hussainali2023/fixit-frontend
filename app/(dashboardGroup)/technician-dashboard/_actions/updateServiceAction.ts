@@ -24,6 +24,7 @@ export const updateServiceAction = async (serviceId: string, payload: any) => {
     if (payload.description) cleanPayload.description = payload.description;
     if (payload.price) cleanPayload.price = Number(payload.price);
     if (payload.category) cleanPayload.category = payload.category;
+    if (payload.image || payload.imageUrl) cleanPayload.image = payload.image || payload.imageUrl;
 
     const res = await fetch(`${getBackendUrl()}/api/services/${serviceId}`, {
       method: "PATCH",

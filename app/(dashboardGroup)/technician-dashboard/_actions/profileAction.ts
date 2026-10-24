@@ -12,11 +12,20 @@ export async function updateProfileAction(prevState: any, formData: FormData) {
   const skills = formData.get("skills");
   const experience = formData.get("experience");
   const location = formData.get("location");
+  const profilePhoto = formData.get("profilePhoto") || formData.get("image");
+  const availability = formData.get("availability");
+  const bio = formData.get("bio");
 
   const payload: any = {};
   if (skills) payload.skills = String(skills);
   if (experience) payload.experience = Number(experience);
   if (location) payload.location = String(location);
+  if (profilePhoto) {
+    payload.profilePhoto = String(profilePhoto);
+    payload.image = String(profilePhoto);
+  }
+  if (availability) payload.availability = String(availability);
+  if (bio) payload.bio = String(bio);
 
   try {
     const accessToken = await isAccessTokenExist();

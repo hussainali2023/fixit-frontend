@@ -24,6 +24,7 @@ export const createServices = async (prevState: any, formData: FormData) => {
       description: formData.get("description"),
       price: Number(formData.get("price")),
       category: formData.get("category") || formData.get("categoryId") || "General",
+      image: (formData.get("image") as string) || (formData.get("imageUrl") as string) || null,
     };
 
     const res = await fetch(`${getBackendUrl()}/api/services`, {

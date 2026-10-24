@@ -15,6 +15,10 @@ export const registerSchema = z
       .string()
       .optional(),
 
+    image: z
+      .string()
+      .optional(),
+
     role: z.enum(["CUSTOMER", "TECHNICIAN", "ADMIN"], {
       message: "Please select your role",
     }),

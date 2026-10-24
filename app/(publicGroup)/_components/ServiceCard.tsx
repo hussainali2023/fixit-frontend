@@ -12,7 +12,7 @@ const CATEGORY_IMAGES: Record<string, string> = {
     "https://bizeleven.com/assets/img/listing-gallery/68b2d31e9a339.jpg",
   ac: "https://www.sipltraining.com/assets/img/sipl-hvac-course.jpeg",
   cleaning:
-    "https://cleaningkarigar.com/assets/service-sofa-DGBCWx4E.png",
+    "https://images.jdmagicbox.com/v2/comp/mangalore/w9/0824px824.x824.230623120146.e4w9/catalogue/d-clean-facility-management-pandeshwar-mangalore-residential-cleaning-services-azoc4ikee0.jpg",
 };
 
 /** Pick a contextual image based on the service category / name / description */
@@ -49,7 +49,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
     typeof service?.category === "string"
       ? service.category
       : service?.category?.name || "General";
-  const imageUrl = service?.image || getServiceImage(service);
+  const imageUrl = service?.image || service?.imageUrl || getServiceImage(service);
 
   return (
     <div className="group relative rounded-2xl bg-card border border-border/60 overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.1)] hover:border-primary/30 transition-all duration-500 flex flex-col justify-between">

@@ -7,18 +7,21 @@ import { apiFetch } from "@/lib/api";
 // POST /api/auth/register — body: { name, email, password, role }
 export async function RegisterAction(prevState: any, data: any) {
   // Accept both FormData and plain object (from react-hook-form via startTransition)
+  const image = data instanceof FormData ? (data.get("image") as string) : data.image;
   const payload = data instanceof FormData
     ? {
         name: data.get("name"),
         email: data.get("email"),
         password: data.get("password"),
         role: data.get("role") === "TECHNICIAN" ? "TECHNICIAN" : "CUSTOMER",
+        ...(image ? { image, profilePhoto: image } : {}),
       }
     : {
         name: data.name,
         email: data.email,
         password: data.password,
         role: data.role === "TECHNICIAN" ? "TECHNICIAN" : "CUSTOMER",
+        ...(image ? { image, profilePhoto: image } : {}),
       };
 
   return apiFetch("/api/auth/register", {

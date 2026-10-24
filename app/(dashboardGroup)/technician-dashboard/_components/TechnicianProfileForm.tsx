@@ -5,6 +5,7 @@ import { useActionState, useEffect } from "react";
 import { User, MapPin, Star, Briefcase, Loader2, Save } from "lucide-react";
 import { updateTechnicianProfileAction } from "@/lib/actions/technicianActions";
 import { toast } from "sonner";
+import { ImageLinkUploader, PRESET_PROFILE_AVATARS } from "@/components/shared/ImageLinkUploader";
 
 interface Props {
   profile: any;
@@ -19,9 +20,23 @@ export default function TechnicianProfileForm({ profile }: Props) {
     else if (state.message) toast.error(state.message);
   }, [state]);
 
+  const defaultPhoto = profile?.profilePhoto || profile?.user?.image || profile?.image || "";
+
   return (
     <form action={action} className="premium-card rounded-2xl p-6 space-y-5">
       <h2 className="text-base font-bold text-foreground">Update Profile</h2>
+
+      {/* Profile Photo Uploader */}
+      <div className="bg-muted/30 border border-border/70 rounded-2xl p-4">
+        <ImageLinkUploader
+          name="profilePhoto"
+          label="Profile Picture URL"
+          placeholder="Paste profile photo URL..."
+          presets={PRESET_PROFILE_AVATARS}
+          aspectRatio="square"
+          defaultValue={defaultPhoto}
+        />
+      </div>
 
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-foreground flex items-center gap-1.5">

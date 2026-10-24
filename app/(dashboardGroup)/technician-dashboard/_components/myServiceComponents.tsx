@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Trash2, Wrench, Clock, DollarSign } from "lucide-react";
 import { toast } from "sonner";
@@ -59,8 +60,19 @@ export default function MyServiceComponent({
           serviceList.map((item) => (
             <div
               key={item.id}
-              className="bg-card border border-border rounded-2xl p-4 shadow-sm space-y-3 flex flex-col justify-between"
+              className="bg-card border border-border rounded-2xl p-4 shadow-sm space-y-3 flex flex-col justify-between overflow-hidden"
             >
+              {(item.image || item.imageUrl) && (
+                <div className="relative w-full h-36 -mx-4 -mt-4 mb-1 rounded-t-2xl overflow-hidden bg-muted">
+                  <Image
+                    unoptimized
+                    src={item.image || item.imageUrl}
+                    alt={item.title || item.name || "Service Image"}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="font-extrabold text-foreground text-sm line-clamp-1">

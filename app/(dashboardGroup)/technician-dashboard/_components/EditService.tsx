@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Edit3, Wrench, DollarSign, Clock, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { updateServiceAction } from "../_actions/updateServiceAction";
+import { ImageLinkUploader } from "@/components/shared/ImageLinkUploader";
 
 interface EditServiceDialogProps {
   service: any;
@@ -91,19 +92,13 @@ export function EditServiceDialog({ service, onSuccess }: EditServiceDialogProps
             />
           </div>
 
-          {/* Image URL */}
-          <div className="space-y-1.5">
-            <Label htmlFor="edit-image" className="text-xs font-semibold flex items-center gap-1">
-              <ImageIcon className="w-3.5 h-3.5 text-primary" /> Image URL
-            </Label>
-            <Input
-              id="edit-image"
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              placeholder="https://..."
-              className="rounded-xl text-xs"
-            />
-          </div>
+          {/* Image Link Uploader */}
+          <ImageLinkUploader
+            name="edit-image"
+            value={image}
+            onChange={(newUrl) => setImage(newUrl)}
+            label="Service Cover Photo URL"
+          />
 
           {/* Price & Duration */}
           <div className="grid grid-cols-2 gap-3">

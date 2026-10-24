@@ -22,6 +22,11 @@ export async function updateTechnicianProfileAction(prevState: any, formData: Fo
   if (formData.get("experience")) payload.experience = Number(formData.get("experience"));
   if (formData.get("location")) payload.location = formData.get("location");
   if (formData.get("availability")) payload.availability = formData.get("availability");
+  const photo = formData.get("profilePhoto") || formData.get("image");
+  if (photo) {
+    payload.profilePhoto = String(photo);
+    payload.image = String(photo);
+  }
 
   const res = await apiFetch("/api/technicians/profile", {
     method: "PUT",

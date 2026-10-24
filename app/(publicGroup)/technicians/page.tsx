@@ -91,7 +91,8 @@ export default async function TechniciansPage() {
               const reviews = getReviews(tech);
               const avgRating = getAvgRating(reviews);
               const category = getTechCategory(tech.skills);
-              const imgUrl = getTechImage(tech.skills);
+              const avatarPhoto = tech.profilePhoto || techUser?.image;
+              const imgUrl = avatarPhoto || getTechImage(tech.skills);
 
               return (
                 <Link
@@ -131,9 +132,19 @@ export default async function TechniciansPage() {
                     <div className="p-5 flex flex-col flex-1 space-y-3">
                       {/* Name + avatar row */}
                       <div className="flex items-center gap-3">
-                        <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-lg font-black shrink-0 group-hover:scale-105 transition-transform duration-300">
-                          {techUser?.name?.[0]?.toUpperCase() || (
-                            <User className="w-5 h-5" />
+                        <div className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-lg font-black shrink-0 group-hover:scale-105 transition-transform duration-300 relative overflow-hidden border border-border/60">
+                          {avatarPhoto ? (
+                            <Image
+                              unoptimized
+                              src={avatarPhoto}
+                              alt={techUser?.name || "Technician"}
+                              fill
+                              className="object-cover"
+                            />
+                          ) : (
+                            techUser?.name?.[0]?.toUpperCase() || (
+                              <User className="w-5 h-5" />
+                            )
                           )}
                         </div>
                         <div className="flex-1 min-w-0">

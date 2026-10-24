@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getMeAction } from "@/app/(authGroup)/_actions/authActions";
 import TechnicianProfileForm from "../_components/TechnicianProfileForm";
 import { User, Mail, Shield } from "lucide-react";
@@ -8,6 +9,7 @@ export default async function TechnicianProfilePage() {
   const meRes = await getMeAction();
   const user = meRes?.data?.user || meRes?.data || null;
   const profile = user?.technicianProfile || null;
+  const avatarUrl = profile?.profilePhoto || user?.image;
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
@@ -21,8 +23,18 @@ export default async function TechnicianProfilePage() {
       {/* User info card */}
       {user && (
         <div className="premium-card rounded-2xl p-5 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-black shrink-0">
-            {user.name?.[0]?.toUpperCase()}
+          <div className="w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-xl font-black shrink-0 relative overflow-hidden border border-border">
+            {avatarUrl ? (
+              <Image
+                unoptimized
+                src={avatarUrl}
+                alt={user.name || "Profile Photo"}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              user.name?.[0]?.toUpperCase()
+            )}
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-foreground">{user.name}</p>

@@ -79,7 +79,8 @@ export default async function TechnicianDetailPage({ params }: Props) {
   );
   const avgRating = getAvgRating(reviews);
   const category = getTechCategory(tech.skills);
-  const imgUrl = getTechImage(tech.skills);
+  const avatarPhoto = tech.profilePhoto || techUser?.image;
+  const imgUrl = avatarPhoto || getTechImage(tech.skills);
 
   return (
     <div className="min-h-screen bg-background">
@@ -117,9 +118,19 @@ export default async function TechnicianDetailPage({ params }: Props) {
           <div className="lg:col-span-1 space-y-6">
             <div className="premium-card rounded-3xl p-6 text-center">
               {/* Avatar */}
-              <div className="w-24 h-24 mx-auto rounded-3xl bg-primary/10 text-primary flex items-center justify-center text-4xl font-black mb-4 border-4 border-background shadow-lg">
-                {techUser?.name?.[0]?.toUpperCase() || (
-                  <User className="w-10 h-10" />
+              <div className="w-24 h-24 mx-auto rounded-3xl bg-primary/10 text-primary flex items-center justify-center text-4xl font-black mb-4 border-4 border-background shadow-lg relative overflow-hidden">
+                {avatarPhoto ? (
+                  <Image
+                    unoptimized
+                    src={avatarPhoto}
+                    alt={techUser?.name || "Technician"}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  techUser?.name?.[0]?.toUpperCase() || (
+                    <User className="w-10 h-10" />
+                  )
                 )}
               </div>
 

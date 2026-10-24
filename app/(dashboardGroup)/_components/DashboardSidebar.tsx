@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Sidebar,
@@ -39,6 +40,7 @@ export default function DashboardSidebar({ user }: SidebarProps) {
   const userRole = userInfo?.role || "CUSTOMER";
   const userName = userInfo?.name || "User";
   const userEmail = userInfo?.email || "";
+  const userPhoto = userInfo?.image || userInfo?.technicianProfile?.profilePhoto;
 
   let navItems: ISidebarItem[] = CUSTOMER_SIDEBAR_ITEMS;
   if (userRole === "TECHNICIAN") navItems = TECHNICIAN_SIDEBAR_ITEMS;
@@ -129,8 +131,18 @@ export default function DashboardSidebar({ user }: SidebarProps) {
             onClick={() => setProfileOpen(!profileOpen)}
             className="w-full flex items-center gap-3 p-2.5 rounded-xl hover:bg-sidebar-accent transition-all cursor-pointer"
           >
-            <div className="w-8 h-8 rounded-xl bg-sidebar-primary/20 text-sidebar-primary flex items-center justify-center font-bold text-sm shrink-0">
-              {userName[0]?.toUpperCase() || <User className="w-4 h-4" />}
+            <div className="w-8 h-8 rounded-xl bg-sidebar-primary/20 text-sidebar-primary flex items-center justify-center font-bold text-sm shrink-0 relative overflow-hidden border border-sidebar-border/60">
+              {userPhoto ? (
+                <Image
+                  unoptimized
+                  src={userPhoto}
+                  alt={userName}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                userName[0]?.toUpperCase() || <User className="w-4 h-4" />
+              )}
             </div>
             <div className="flex-1 min-w-0 text-left">
               <p className="text-xs font-bold text-sidebar-foreground truncate">{userName}</p>
