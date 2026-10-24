@@ -30,43 +30,43 @@ export default function ContactPage() {
                 Contact Information
               </h2>
               <div className="space-y-5 text-xs">
-                <div className="flex items-start gap-3.5">
-                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+                <a href="tel:+919064198653" className="flex items-start gap-3.5 group hover:text-primary transition-colors">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0 group-hover:scale-105 transition-transform">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-bold text-foreground text-sm">
+                    <p className="font-bold text-foreground text-sm group-hover:text-primary transition-colors">
                       Customer Helpline
                     </p>
-                    <p className="text-muted-foreground">+91 9064198653</p>
+                    <p className="text-muted-foreground group-hover:underline">+91 9064198653</p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start gap-3.5">
-                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+                <a href="mailto:iamhussainali2@gmail.com" className="flex items-start gap-3.5 group hover:text-primary transition-colors">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0 group-hover:scale-105 transition-transform">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-bold text-foreground text-sm">
+                    <p className="font-bold text-foreground text-sm group-hover:text-primary transition-colors">
                       Email Address
                     </p>
-                    <p className="text-muted-foreground">iamhussainali2@gmail.com</p>
+                    <p className="text-muted-foreground group-hover:underline">iamhussainali2@gmail.com</p>
                   </div>
-                </div>
+                </a>
 
-                <div className="flex items-start gap-3.5">
-                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">
+                <a href="https://maps.google.com/?q=Kolkata,+India" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3.5 group hover:text-primary transition-colors">
+                  <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0 group-hover:scale-105 transition-transform">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="font-bold text-foreground text-sm">
+                    <p className="font-bold text-foreground text-sm group-hover:text-primary transition-colors">
                       Headquarters
                     </p>
-                    <p className="text-muted-foreground">
-                      Kolkata, India
+                    <p className="text-muted-foreground group-hover:underline">
+                      Kolkata, West Bengal, India
                     </p>
                   </div>
-                </div>
+                </a>
 
                 <div className="flex items-start gap-3.5">
                   <div className="p-3 rounded-2xl bg-primary/10 text-primary border border-primary/20 shrink-0">

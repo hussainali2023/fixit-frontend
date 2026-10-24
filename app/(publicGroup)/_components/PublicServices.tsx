@@ -6,24 +6,24 @@ import { ServiceCard } from "./ServiceCard";
 import Link from "next/link";
 import { ArrowRight, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export function PublicServices({ services = [] }: { services: any[] }) {
   return (
-    <section className="py-16 lg:py-24 bg-background">
+    <section className="py-20 lg:py-28 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -33,7 +33,7 @@ export function PublicServices({ services = [] }: { services: any[] }) {
           className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
         >
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-primary tracking-wider uppercase bg-primary/10 px-3.5 py-1 rounded-full border border-primary/20">
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-primary tracking-wider uppercase bg-primary/8 px-4 py-1.5 rounded-full border border-primary/15">
               <Wrench className="w-3.5 h-3.5" />
               <span>Our Services</span>
             </div>
@@ -42,7 +42,7 @@ export function PublicServices({ services = [] }: { services: any[] }) {
               Explore Our Professional Services
             </h2>
 
-            <p className="text-muted-foreground text-sm sm:text-base">
+            <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
               From plumbing and electrical repairs to AC servicing and deep
               cleaning — get background-checked experts at your doorstep.
             </p>
@@ -51,7 +51,7 @@ export function PublicServices({ services = [] }: { services: any[] }) {
           <Link href="/services" className="shrink-0">
             <Button
               variant="outline"
-              className="rounded-xl flex items-center gap-2 font-semibold hover:scale-105 transition-transform"
+              className="rounded-xl flex items-center gap-2 font-semibold hover:scale-[1.02] transition-all border-border/60"
             >
               <span>View All Services</span>
               <ArrowRight className="w-4 h-4" />

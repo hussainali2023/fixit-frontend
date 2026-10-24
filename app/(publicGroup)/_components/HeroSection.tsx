@@ -2,9 +2,23 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Play, Star, ShieldCheck, CheckCircle2, Search, Wrench, Zap, Droplet, Sparkles } from "lucide-react";
+import {
+  Search,
+  Wrench,
+  Zap,
+  Droplet,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  Calendar,
+  CreditCard,
+  UserCheck,
+  ArrowRight,
+  Briefcase,
+  HelpCircle,
+  FileCheck,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -15,179 +29,240 @@ export function HeroSection() {
   const handleHeroSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/services?searchTerm=${encodeURIComponent(searchTerm)}`);
+      router.push(`/services?search=${encodeURIComponent(searchTerm)}`);
     } else {
       router.push("/services");
     }
   };
 
-  return (
-    <section className="relative w-full bg-background py-16 lg:py-24 overflow-hidden">
+  const platformFeatures = [
+    {
+      step: "01",
+      icon: Search,
+      title: "Browse Real Services",
+      desc: "Explore verified listings with transparent upfront pricing for AC, electrical, plumbing, and cleaning.",
+    },
+    {
+      step: "02",
+      icon: Calendar,
+      title: "Schedule Your Slot",
+      desc: "Choose your preferred service date. The technician confirms arrival before any work starts.",
+    },
+    {
+      step: "03",
+      icon: CreditCard,
+      title: "Secure Digital Payment",
+      desc: "Pay safely online only after technician confirmation. Download verifiable PDF receipts anytime.",
+    },
+    {
+      step: "04",
+      icon: Briefcase,
+      title: "Earn as a Technician",
+      desc: "Skilled professionals can register, create service offerings, set availability, and manage client jobs.",
+    },
+  ];
 
-      {/* Premium Ambient Background Glow Blobs */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none translate-y-1/2" />
+  return (
+    <section className="relative w-full bg-background py-14 lg:py-20 overflow-hidden border-b border-border/40">
+      {/* Ambient Glow Elements */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[100px] pointer-events-none -translate-y-1/3" />
+      <div className="absolute bottom-0 right-1/6 w-[450px] h-[450px] bg-amber-400/6 rounded-full blur-[90px] pointer-events-none translate-y-1/3" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-
-          {/* LEFT COLUMN: Text, Interactive Search & Actions */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          {/* LEFT COLUMN: Clear explanation & search */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
             className="lg:col-span-6 space-y-6 text-left"
           >
-            {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 text-xs font-extrabold text-primary bg-primary/10 px-3.5 py-1.5 rounded-full border border-primary/20 shadow-xs">
+            {/* Mission Badge */}
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-primary bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
               <ShieldCheck className="w-4 h-4" />
-              <span>#1 Home Service Marketplace in India</span>
+              <span>Verified On-Demand Repair & Maintenance Marketplace</span>
             </div>
 
             {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-3xl sm:text-5xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-[1.15]"
+            <h1
+              className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.14]"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
-              Your Trusted Partner for <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-primary via-emerald-600 to-primary bg-clip-text text-transparent">
-                Home & Corporate
-              </span> <br className="hidden sm:block" />
-              Services
-            </motion.h1>
+              Fix Your Home & Office Repairs with{" "}
+              <span className="bg-gradient-to-r from-primary via-teal-500 to-cyan-500 bg-clip-text text-transparent">
+                Verified Experts
+              </span>
+            </h1>
 
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-base text-muted-foreground max-w-xl font-normal"
-            >
-              From AC repair to electrical wiring — get background-checked expert technicians at your doorstep within 30 minutes.
-            </motion.p>
+            {/* What this site is and what it works for */}
+            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <strong>FixItNow</strong> is a transparent service marketplace connecting homeowners and corporate offices directly with skilled, background-checked technicians. Whether you need electrical wiring, AC servicing, plumbing repairs, or deep cleaning — find, schedule, and pay verified professionals with zero hidden charges.
+            </p>
 
-            {/* 🟢 INTERACTIVE HERO SEARCH BAR */}
-            <motion.form
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
+            {/* Search Bar */}
+            <form
               onSubmit={handleHeroSearch}
-              className="relative max-w-lg flex items-center bg-card border border-border p-1.5 rounded-2xl shadow-lg focus-within:ring-2 focus-within:ring-primary/50"
+              className="relative max-w-xl flex items-center bg-card border border-border/70 p-1.5 rounded-2xl shadow-sm focus-within:shadow-md focus-within:border-primary/40 transition-all duration-300"
             >
-              <Search className="w-5 h-5 absolute left-4 text-muted-foreground" />
+              <Search className="w-5 h-5 absolute left-4 text-muted-foreground/60" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="What service do you need? (e.g. AC, Electrical, Plumbing)..."
-                className="w-full bg-transparent pl-11 pr-28 py-3 text-xs sm:text-sm font-medium text-foreground focus:outline-none"
+                placeholder="Search services (e.g. AC Repair, Electrical, Plumbing)..."
+                className="w-full bg-transparent pl-11 pr-28 py-3 text-xs sm:text-sm font-medium text-foreground focus:outline-none placeholder:text-muted-foreground/50"
               />
               <Button
                 type="submit"
-                className="absolute right-1.5 rounded-xl text-xs font-bold px-4 py-2.5 bg-primary text-white cursor-pointer"
+                className="absolute right-1.5 rounded-xl text-xs font-bold px-4 py-2.5 bg-gradient-to-r from-primary to-teal-500 text-white cursor-pointer shadow-sm hover:shadow-md transition-all"
               >
-                Search Now
+                Search Services
               </Button>
-            </motion.form>
+            </form>
 
-            {/* 🟢 POPULAR CATEGORY CHIPS */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-muted-foreground">
-              <span>Popular:</span>
-              <Link href="/services?searchTerm=AC">
-                <span className="inline-flex items-center gap-1 bg-accent/60 hover:bg-primary/10 hover:text-primary px-3 py-1 rounded-full border border-border transition-all cursor-pointer">
+            {/* Popular Services Quick Chips */}
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-muted-foreground">
+              <span className="text-foreground/70">Popular Categories:</span>
+              <Link href="/services?category=AC+Repair">
+                <span className="inline-flex items-center gap-1.5 bg-muted/60 hover:bg-primary/10 hover:text-primary px-3 py-1.5 rounded-full border border-border/50 transition-all cursor-pointer">
                   <Wrench className="w-3 h-3 text-primary" /> AC Repair
                 </span>
               </Link>
-              <Link href="/services?searchTerm=Electrical">
-                <span className="inline-flex items-center gap-1 bg-accent/60 hover:bg-primary/10 hover:text-primary px-3 py-1 rounded-full border border-border transition-all cursor-pointer">
+              <Link href="/services?category=Electrical">
+                <span className="inline-flex items-center gap-1.5 bg-muted/60 hover:bg-amber-500/10 hover:text-amber-600 px-3 py-1.5 rounded-full border border-border/50 transition-all cursor-pointer">
                   <Zap className="w-3 h-3 text-amber-500" /> Electrical
                 </span>
               </Link>
-              <Link href="/services?searchTerm=Plumbing">
-                <span className="inline-flex items-center gap-1 bg-accent/60 hover:bg-primary/10 hover:text-primary px-3 py-1 rounded-full border border-border transition-all cursor-pointer">
-                  <Droplet className="w-3 h-3 text-blue-500" /> Plumbing
+              <Link href="/services?category=Plumbing">
+                <span className="inline-flex items-center gap-1.5 bg-muted/60 hover:bg-sky-500/10 hover:text-sky-600 px-3 py-1.5 rounded-full border border-border/50 transition-all cursor-pointer">
+                  <Droplet className="w-3 h-3 text-sky-500" /> Plumbing
                 </span>
               </Link>
-              <Link href="/services?searchTerm=Cleaning">
-                <span className="inline-flex items-center gap-1 bg-accent/60 hover:bg-primary/10 hover:text-primary px-3 py-1 rounded-full border border-border transition-all cursor-pointer">
+              <Link href="/services?category=Cleaning">
+                <span className="inline-flex items-center gap-1.5 bg-muted/60 hover:bg-emerald-500/10 hover:text-emerald-600 px-3 py-1.5 rounded-full border border-border/50 transition-all cursor-pointer">
                   <Sparkles className="w-3 h-3 text-emerald-500" /> Cleaning
                 </span>
               </Link>
             </div>
 
-            {/* Primary Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
+            {/* Direct Role Action CTAs */}
+            <div className="pt-2 flex flex-wrap items-center gap-3">
               <Link href="/services">
-                <Button className="text-sm font-bold px-7 py-6 rounded-xl shadow-lg cursor-pointer transition-all hover:scale-[1.03] bg-primary text-white">
-                  Book Service Now
+                <Button className="rounded-xl font-bold text-xs px-6 py-5 bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm flex items-center gap-2">
+                  <span>Browse All Services</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
-
-              <Link href="/services">
-                <Button
-                  variant="outline"
-                  className="border-primary/40 text-foreground hover:bg-accent text-sm font-semibold px-6 py-6 rounded-xl cursor-pointer transition-all flex items-center gap-2 hover:scale-[1.03]"
-                >
-                  <Play className="w-4 h-4 fill-primary text-primary" />
-                  Explore Services
+              <Link href="/register?role=technician">
+                <Button variant="outline" className="rounded-xl font-semibold text-xs px-5 py-5 border-border hover:bg-muted/70 flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-primary" />
+                  <span>Join as Technician</span>
                 </Button>
               </Link>
-            </motion.div>
-
-            {/* Hero Trust Counter Metrics Badge */}
-            <div className="pt-6 border-t border-border/80 grid grid-cols-3 gap-4">
-              <div>
-                <p className="text-lg sm:text-2xl font-black text-foreground">5,000+</p>
-                <p className="text-[11px] font-semibold text-muted-foreground">Happy Customers</p>
-              </div>
-              <div>
-                <p className="text-lg sm:text-2xl font-black text-primary">1,200+</p>
-                <p className="text-[11px] font-semibold text-muted-foreground">Verified Technicians</p>
-              </div>
-              <div>
-                <p className="text-lg sm:text-2xl font-black text-amber-500 flex items-center gap-1">
-                  4.9 <Star className="w-4 h-4 fill-amber-400 text-amber-400 inline" />
-                </p>
-                <p className="text-[11px] font-semibold text-muted-foreground">Average Rating</p>
-              </div>
             </div>
 
+            {/* Real Trust Pillars (Replacing fake stats/ratings) */}
+            <div className="pt-6 border-t border-border/50 grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Verified Technicians</span>
+              </div>
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Upfront Pricing</span>
+              </div>
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                <span>Secure Payments</span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: Hero Image */}
+          {/* RIGHT COLUMN: Interactive Platform Guide (Replaces the Image) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-6 relative flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="lg:col-span-6"
           >
-            <div className="relative w-full max-w-lg aspect-4/3 rounded-3xl overflow-hidden shadow-2xl border border-border group">
-              <Image
-                unoptimized
-                src="https://i.ibb.co.com/LXkVj3tq/part-male-construction-worker-329181-3734.avif"
-                alt="Home Services Helper"
-                fill
-                priority
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-
-              {/* Floating Verified Badge Card */}
-              <div className="absolute bottom-4 left-4 bg-background/90 backdrop-blur-md p-3.5 rounded-2xl border border-border shadow-lg flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
-                  <CheckCircle2 className="w-5 h-5" />
+            <div className="premium-card rounded-3xl p-6 sm:p-8 bg-card border border-border/80 shadow-lg space-y-6">
+              
+              {/* Card Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-border/60">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 text-xs font-bold text-primary uppercase tracking-wider">
+                    <FileCheck className="w-4 h-4" />
+                    <span>How FixItNow Works</span>
+                  </div>
+                  <h2 className="text-xl font-extrabold text-foreground tracking-tight">
+                    Your Complete Service Hub
+                  </h2>
                 </div>
-                <div>
-                  <p className="text-xs font-bold text-foreground">Verified Technician</p>
-                  <p className="text-[10px] text-muted-foreground">30-Day Service Warranty Included</p>
-                </div>
+                <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                  Step-by-Step
+                </span>
               </div>
+
+              {/* 4 Clear Step Features */}
+              <div className="space-y-3.5">
+                {platformFeatures.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.step}
+                      className="p-3.5 rounded-2xl bg-muted/40 hover:bg-muted/80 border border-border/50 hover:border-primary/30 transition-all flex items-start gap-3.5 group"
+                    >
+                      <div className="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 font-black text-xs group-hover:scale-105 transition-transform">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <h3 className="font-bold text-xs sm:text-sm text-foreground group-hover:text-primary transition-colors">
+                            {item.title}
+                          </h3>
+                          <span className="text-[10px] font-black font-mono text-muted-foreground/60">
+                            STEP {item.step}
+                          </span>
+                        </div>
+                        <p className="text-[11px] sm:text-xs text-muted-foreground mt-0.5 leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Two Role Options Footer */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-border/60">
+                <Link
+                  href="/services"
+                  className="p-3.5 rounded-2xl bg-primary/5 hover:bg-primary/10 border border-primary/20 transition-all block group"
+                >
+                  <p className="text-xs font-bold text-primary flex items-center justify-between">
+                    <span>For Customers</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </p>
+                  <p className="text-[11px] text-muted-foreground mt-1">
+                    Book repairs & get doorstep visits with upfront prices.
+                  </p>
+                </Link>
+
+                <Link
+                  href="/register?role=technician"
+                  className="p-3.5 rounded-2xl bg-muted/60 hover:bg-muted border border-border transition-all block group"
+                >
+                  <p className="text-xs font-bold text-foreground flex items-center justify-between">
+                    <span>For Technicians</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </p>
+                  <p className="text-[11px] text-muted-foreground mt-1">
+                    List your skills, accept jobs, and earn on your schedule.
+                  </p>
+                </Link>
+              </div>
+
             </div>
           </motion.div>
 

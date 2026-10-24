@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { logoutAction } from "@/app/(authGroup)/_actions/authActions";
 import { toast } from "sonner";
+import { ModeToggle } from "./Mode";
 
 interface NavbarProps {
   user: any;
@@ -66,21 +67,21 @@ export function Navbar({ user }: NavbarProps) {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-500 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-background/80 backdrop-blur-md border-b border-transparent"
+          ? "bg-background/80 backdrop-blur-2xl border-b border-border/60 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
+          : "bg-background/50 backdrop-blur-lg border-b border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Brand Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-primary text-primary-foreground flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-teal-400 text-primary-foreground flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:scale-105 transition-all duration-300">
               <Wrench className="w-4.5 h-4.5" />
             </div>
             <span
-              className="text-xl font-bold"
+              className="text-xl font-bold tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               <span className="text-primary">FixIt</span>
@@ -89,17 +90,17 @@ export function Navbar({ user }: NavbarProps) {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden md:flex items-center gap-0.5">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  className={`px-3.5 py-2 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
                     isActive
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                      ? "text-primary bg-primary/8"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                   }`}
                 >
                   {link.label}
@@ -108,40 +109,42 @@ export function Navbar({ user }: NavbarProps) {
             })}
           </nav>
 
-          {/* Right: Auth + User */}
-          <div className="flex items-center gap-3">
+          {/* Right: Theme + Auth + User */}
+          <div className="flex items-center gap-2">
+            <ModeToggle />
+
             {isLoggedIn ? (
               <div className="relative hidden md:block">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-card hover:bg-muted transition-all text-sm font-semibold text-foreground cursor-pointer"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-border/70 bg-card/60 backdrop-blur-sm hover:bg-muted/60 transition-all text-sm font-semibold text-foreground cursor-pointer"
                 >
-                  <div className="w-7 h-7 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">
+                  <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 text-primary flex items-center justify-center font-bold text-xs">
                     {userInfo?.name?.[0]?.toUpperCase() || <User className="w-3.5 h-3.5" />}
                   </div>
                   <span className="max-w-[100px] truncate">{userInfo?.name}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-52 bg-card border border-border rounded-2xl shadow-xl py-2 z-50 animate-fade-in">
-                    <div className="px-4 py-2 border-b border-border mb-1">
+                  <div className="absolute right-0 mt-2 w-56 bg-card/95 backdrop-blur-2xl border border-border/60 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] py-2 z-50 animate-fade-in">
+                    <div className="px-4 py-2.5 border-b border-border/50 mb-1">
                       <p className="text-xs font-bold text-foreground truncate">{userInfo?.name}</p>
-                      <p className="text-[11px] text-muted-foreground truncate">{userInfo?.email}</p>
-                      <span className="inline-block mt-1 text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                      <p className="text-[11px] text-muted-foreground truncate mt-0.5">{userInfo?.email}</p>
+                      <span className="inline-block mt-1.5 text-[10px] font-bold uppercase px-2 py-0.5 rounded-md bg-primary/10 text-primary tracking-wider">
                         {role}
                       </span>
                     </div>
                     <Link
                       href={dashboardHref}
-                      className="flex items-center gap-2.5 px-4 py-2 text-sm text-foreground hover:bg-muted transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-foreground hover:bg-muted/50 transition-colors rounded-lg mx-1"
                     >
                       <LayoutDashboard className="w-4 h-4 text-primary" />
                       Dashboard
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-destructive hover:bg-destructive/10 transition-colors"
+                      className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-destructive hover:bg-destructive/8 transition-colors rounded-lg mx-1"
                     >
                       <LogOut className="w-4 h-4" />
                       Logout
@@ -153,13 +156,13 @@ export function Navbar({ user }: NavbarProps) {
               <div className="hidden md:flex items-center gap-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 rounded-xl text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
+                  className="px-4 py-2 rounded-lg text-sm font-semibold text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all"
                 >
                   Log In
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 rounded-xl text-sm font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-md transition-all hover:scale-[1.02]"
+                  className="px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-primary to-teal-500 text-primary-foreground shadow-md hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Get Started
                 </Link>
@@ -169,7 +172,7 @@ export function Navbar({ user }: NavbarProps) {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl border border-border bg-card cursor-pointer"
+              className="md:hidden w-9 h-9 flex items-center justify-center rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm cursor-pointer hover:bg-muted/50 transition-colors"
             >
               {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
@@ -179,22 +182,22 @@ export function Navbar({ user }: NavbarProps) {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-background/98 backdrop-blur-xl px-4 py-4 space-y-1 animate-fade-in">
+        <div className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-2xl px-4 py-4 space-y-1 animate-fade-in">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                 pathname === link.href
-                  ? "bg-primary/10 text-primary font-bold"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  ? "bg-primary/8 text-primary font-bold"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
               }`}
             >
               {link.label}
             </Link>
           ))}
 
-          <div className="pt-2 border-t border-border mt-2">
+          <div className="pt-2 border-t border-border/50 mt-2">
             {isLoggedIn ? (
               <>
                 <div className="px-4 py-2 mb-1">
@@ -203,23 +206,23 @@ export function Navbar({ user }: NavbarProps) {
                 </div>
                 <Link
                   href={dashboardHref}
-                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-foreground hover:bg-muted"
+                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-foreground hover:bg-muted/50"
                 >
                   <LayoutDashboard className="w-4 h-4 text-primary" /> Dashboard
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-destructive hover:bg-destructive/10"
+                  className="w-full flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium text-destructive hover:bg-destructive/8"
                 >
                   <LogOut className="w-4 h-4" /> Logout
                 </button>
               </>
             ) : (
               <div className="flex flex-col gap-2">
-                <Link href="/login" className="block px-4 py-3 rounded-xl text-sm font-semibold text-center border border-border">
+                <Link href="/login" className="block px-4 py-3 rounded-xl text-sm font-semibold text-center border border-border/60">
                   Log In
                 </Link>
-                <Link href="/register" className="block px-4 py-3 rounded-xl text-sm font-bold text-center bg-primary text-primary-foreground">
+                <Link href="/register" className="block px-4 py-3 rounded-xl text-sm font-bold text-center bg-gradient-to-r from-primary to-teal-500 text-primary-foreground shadow-md">
                   Get Started
                 </Link>
               </div>

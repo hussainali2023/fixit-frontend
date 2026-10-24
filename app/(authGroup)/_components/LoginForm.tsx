@@ -75,16 +75,16 @@ const LoginForm = () => {
         <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider text-center">
           ⚡ 1-Click Demo Login
         </p>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-3 gap-1.5">
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={() => handleQuickDemo(DEMO_CUSTOMER.email, DEMO_CUSTOMER.pass, "Customer")}
-            className="rounded-xl text-[11px] font-bold py-1.5 px-1 h-auto flex items-center justify-center gap-1 cursor-pointer hover:bg-primary/10"
+            className="rounded-xl text-[10px] font-bold py-1.5 px-1 h-auto flex flex-col sm:flex-row items-center justify-center gap-1 cursor-pointer hover:bg-primary/10"
           >
-            <UserCheck className="w-3.5 h-3.5 text-primary" />
-            <span>Demo Customer</span>
+            <UserCheck className="w-3.5 h-3.5 text-primary shrink-0" />
+            <span className="truncate">Customer</span>
           </Button>
 
           <Button
@@ -92,10 +92,10 @@ const LoginForm = () => {
             variant="outline"
             size="sm"
             onClick={() => handleQuickDemo(DEMO_TECHNICIAN.email, DEMO_TECHNICIAN.pass, "Technician")}
-            className="rounded-xl text-[11px] font-bold py-1.5 px-1 h-auto flex items-center justify-center gap-1 cursor-pointer hover:bg-emerald-500/10"
+            className="rounded-xl text-[10px] font-bold py-1.5 px-1 h-auto flex flex-col sm:flex-row items-center justify-center gap-1 cursor-pointer hover:bg-teal-500/10"
           >
-            <Wrench className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Demo Technician</span>
+            <Wrench className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+            <span className="truncate">Technician</span>
           </Button>
 
           <Button
@@ -103,10 +103,10 @@ const LoginForm = () => {
             variant="outline"
             size="sm"
             onClick={() => handleQuickDemo(DEMO_ADMIN.email, DEMO_ADMIN.pass, "Admin")}
-            className="rounded-xl text-[11px] font-bold py-1.5 px-1 h-auto flex items-center justify-center gap-1 cursor-pointer hover:bg-emerald-500/10"
+            className="rounded-xl text-[10px] font-bold py-1.5 px-1 h-auto flex flex-col sm:flex-row items-center justify-center gap-1 cursor-pointer hover:bg-amber-500/10"
           >
-            <Wrench className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Demo ADMIN</span>
+            <Shield className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+            <span className="truncate">Admin</span>
           </Button>
         </div>
       </div>

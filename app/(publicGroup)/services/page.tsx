@@ -15,7 +15,7 @@ import {
 export const dynamic = "force-dynamic";
 
 interface Props {
-  searchParams: Promise<{ search?: string; category?: string; location?: string }>;
+  searchParams: Promise<{ search?: string; searchTerm?: string; category?: string; location?: string }>;
 }
 
 const CATEGORIES = [
@@ -55,7 +55,7 @@ function getServiceImage(service: any): string {
 
 export default async function ServicesPage({ searchParams }: Props) {
   const params = await searchParams;
-  const search = params.search || "";
+  const search = params.search || params.searchTerm || "";
   const category = params.category || "";
   const location = params.location || "";
 

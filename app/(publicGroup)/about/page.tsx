@@ -11,10 +11,10 @@ import { Button } from "@/components/ui/button";
 
 export default function AboutPage() {
   const stats = [
-    { label: "Completed Services", value: "5,000+" },
-    { label: "Verified Technicians", value: "200+" },
-    { label: "Satisfied Customers", value: "4,800+" },
-    { label: "Service Categories", value: "15+" },
+    { label: "Service Warranty", value: "30-Day" },
+    { label: "Direct Matching", value: "Verified" },
+    { label: "Pricing Policy", value: "Upfront" },
+    { label: "Support Assistance", value: "24/7" },
   ];
 
   const values = [

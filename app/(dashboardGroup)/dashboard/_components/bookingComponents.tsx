@@ -2,6 +2,7 @@
 "use client";
 
 import React, { useState, useTransition } from "react";
+import Link from "next/link";
 import {
   Calendar,
   Clock,
@@ -276,12 +277,12 @@ export default function CustomerBookingListUI({ bookings: initialBookings }: { b
             {filter !== "ALL" ? `No ${filter.replace("_", " ")} bookings` : "You haven't made any bookings yet."}
           </p>
           {filter === "ALL" && (
-            <a
+            <Link
               href="/services"
-              className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm"
             >
               Browse Services <ChevronRight className="w-4 h-4" />
-            </a>
+            </Link>
           )}
         </div>
       )}

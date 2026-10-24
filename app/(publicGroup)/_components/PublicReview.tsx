@@ -34,48 +34,48 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-16 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Animated Header */}
+    <section className="py-20 bg-background overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto space-y-3"
+          className="text-center max-w-2xl mx-auto space-y-4"
         >
-          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-500 uppercase bg-amber-50 dark:bg-amber-950/40 px-3.5 py-1 rounded-full border border-amber-200">
+          <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 uppercase bg-amber-50 dark:bg-amber-950/40 px-4 py-1.5 rounded-full border border-amber-200/60 dark:border-amber-800/50">
             <Star className="w-3.5 h-3.5 fill-amber-400" />
             <span>Customer Reviews</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground">
-            Loved by Thousands of Homeowners
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight">
+            Authentic Customer Feedback
           </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            See what our customers have to say about their experience with Fixit
+          <p className="text-sm text-muted-foreground">
+            See what our customers have to say about their experience with FixIt
             Now.
           </p>
         </motion.div>
 
-        {/* Animated Testimonials Cards Grid */}
+        {/* Testimonials Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {reviews.map((r, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="bg-card border border-border rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all space-y-4 flex flex-col justify-between"
+              transition={{ duration: 0.5, delay: i * 0.12 }}
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
+              className="bg-card border border-border/60 rounded-2xl p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-all duration-500 space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
-                <Quote className="w-8 h-8 text-primary/30" />
-                <p className="text-xs text-muted-foreground leading-relaxed italic">
-                  {r.text}
+                <Quote className="w-7 h-7 text-primary/20" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  &ldquo;{r.text}&rdquo;
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-border flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-primary/20">
+              <div className="pt-4 border-t border-border/40 flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border-2 border-primary/15">
                   <Image
                     unoptimized
                     src={r.avatar}
@@ -85,12 +85,17 @@ export function TestimonialsSection() {
                   />
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-xs text-foreground">
+                  <h4 className="font-bold text-sm text-foreground">
                     {r.name}
                   </h4>
-                  <p className="text-[10px] text-muted-foreground">
+                  <p className="text-[11px] text-muted-foreground">
                     {r.location}
                   </p>
+                </div>
+                <div className="ml-auto flex items-center gap-0.5">
+                  {[...Array(r.rating)].map((_, j) => (
+                    <Star key={j} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                  ))}
                 </div>
               </div>
             </motion.div>
